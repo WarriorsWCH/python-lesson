@@ -211,3 +211,79 @@ python支持以下几种运算符:
 |and	|x and y	|布尔"与" - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。	|(a and b) 返回 20。
 |or	|x or y	|布尔"或" - 如果 x 是 True，它返回 True，否则它返回 y 的计算值。|	(a or b) 返回 10。
 |not	|not x	|布尔"非" - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。|	not(a and b) 返回 False
+
+#Python系列教程(三):标识符、关键字
+###一、标识符
+
+标示符（IDentifier）是指用来标识某个实体的一个符号。在不同的应用环境下有不同的含义。
+在日常生活中，标示符是用来指定某个东西、人，要用到它，他或她的名字；在数学中解方程时，我们也常常用到这样或那样的变量名或函数名；
+
+**在编程语言中，标识符是用户编程时使用的名字，对于变量、常量、函数、语句块也有名字；我们统统称之为标识符。**
+
+####1.1标示符的规则
+**标示符由字母、下划线和数字组成，且数字不能开头**
+
+示例如下：
+```
+   fromNo12
+   my_Boolean
+   Obj2
+   myInt
+   test1
+   Mike2jack
+   My_tExt
+   _test
+   jack_rose
+```
+错误示例如下：
+```
+   from#12
+   my-Boolean
+   2ndObj
+   test!32
+   haha(da)tt
+   int
+   jack&rose
+   G.U.I
+```
+**注：python中的标识符是区分大小写的**
+![图1.jpg](http://upload-images.jianshu.io/upload_images/2107063-f63a61ab571ef271.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+####1.2命名规则
+
+- **见名知意**
+
+    起一个有意义的名字，尽量做到看一眼就知道是什么意思(提高代码可 读性) 比如: 名字 可以定义为 name , 定义学生可以使用 student
+
+- **驼峰命名法**
+
+    小驼峰式命名法（lower camel case）： 第一个单词以小写字母开始；第二个单词的首字母大写，例如：myName、aDog
+
+    大驼峰式命名法（upper camel case）： 每一个单字的首字母都采用大写字母，例如：FirstName、LastName
+![图2.jpg](http://upload-images.jianshu.io/upload_images/2107063-549b8bc8d63074cb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+     不过在程序员中还有一种命名法比较流行，就是用下划线“_”来连接所有的单词，比如send_buf
+
+###二、关键字
+- **什么是关键字**
+    python一些具有特殊功能的标示符，这就是所谓的关键字
+    关键字，是python已经使用的了，所以不允许开发者自己定义和关键字相同的名字的标示符
+
+- **所有关键字**
+```
+     and     as      assert     break     class      continue    def     del
+      elif    else    except     exec      finally    for         from    global
+      if      in      import     is        lambda     not         or      pass
+      print   raise   return     try       while      with        yield
+```
+**注：也就是说这些关键字不能作为标识符使用**
+
+- **查看关键字**
+```
+import keyword
+print (keyword.kwlist)
+```
+打印信息：
+```
+['and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'exec', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'not', 'or', 'pass', 'print', 'raise', 'return', 'try', 'while', 'with', 'yield']
+```
