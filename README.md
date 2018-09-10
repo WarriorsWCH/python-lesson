@@ -810,3 +810,384 @@ while n < 10:
 - 要特别注意，不要滥用break和continue语句。break和continue会造成代码执行逻辑分叉过多，容易出错。大多数循环并不需要用到break和continue语句，上面的两个例子，都可以通过改写循环条件或者修改循环逻辑，去掉break和continue语句。
 
 - 有些时候，如果代码写得有问题，会让程序陷入“死循环”，也就是永远循环下去。这时可以用Ctrl+C退出程序，或者强制结束Python进程。
+
+# Python系列教程(七):字符串
+#### 1.1 字符串的格式
+在python中，字符串是以单引号'或双引号"括起来的任意文本，比如'abc'，"xyz"等等
+
+如下定义的变量b，存储的是字符串类型的值
+
+    b = "hello python"
+    或者
+    b = 'hello python'
+
+#### 1.2 字符串输出
+
+示例如下：
+
+    name = 'joy'
+    text= '你好'
+    phone='13344880909'
+
+    print('--------------------------------------------------')
+    print("姓名：%s"%name)
+    print("职位：%s"%text)
+   
+结果:
+
+    --------------------------------------------------
+    姓名： joy
+    内容： 你好
+    电话： 13344880909
+  
+#### 1.3 下标索引
+
+所谓“下标”，就是编号，就好比超市中的存储柜的编号，通过这个编号就能找到相应的存储空间
+
+列表与元组支持下标索引好理解，字符串实际上就是字符的数组，所以也支持下标索引。
+
+
+如果想取出部分字符，那么可以通过下标的方法，（注意python中下标从 0 开始）
+
+```
+   name = 'abcdef'
+
+   print(name[0])
+   print(name[1])
+   print(name[2])
+```
+结果：
+```
+a
+b
+c
+```
+#### 1.4 字符串常见操作
+
+如有字符串`mystr = 'hello world python world hello'`，以下是常见的操作
+
+#### <1>find
+检测 str 是否包含在 mystr中，如果是返回开始的索引值，否则返回-1
+
+**语法：mystr.find(str, start=0, end=len(mystr))**
+```
+  mystr.find('python')
+  mystr.find('python',0,10)
+```
+结果：
+```
+12
+-1
+```
+#### <2>index
+跟find()方法一样，只不过如果str不在 mystr中会报一个异常.
+
+**语法：mystr.index(str, start=0, end=len(mystr)) **
+```
+  mystr.index('python')
+  mystr.index('python',0,10)
+```
+结果：
+```
+12
+File "/usercode/file.py", line 5, in <module>
+    mystr.index('python',0,10)
+ValueError: substring not found
+```
+
+#### <3>count
+返回 str在start和end之间 在 mystr里面出现的次数
+
+**语法：mystr.count(str, start=0, end=len(mystr))**
+```
+  mystr.count('python')
+  mystr.count('l')
+```
+结果：
+```
+ 1
+ 6
+```
+
+#### <4>replace
+把 mystr 中的 str1 替换成 str2,如果 count 指定，则替换不超过 count 次.
+
+**语法：mystr.replace(str1, str2,  mystr.count(str1))**
+```
+  mystr.replace('hello','HELLO')
+  mystr.replace('hello','HELLO',1)
+```
+结果：
+```
+ HELLO worLd python worLd HELLO
+ HELLO world python world hello
+```
+
+#### <5>split
+以 str 为分隔符切片 mystr，如果 maxsplit有指定值，则仅分隔 maxsplit 个子字符串
+
+**语法：mystr.split(str,maxsplit ) **
+```
+  mystr.split(' ')
+  mystr.replace(' ',2)
+```
+结果：
+```
+ ['hello', 'world', 'python', 'world', 'hello']
+ ['hello', 'world', 'python world hello']
+```
+#### <6>capitalize
+把字符串的第一个字符大写
+
+**语法：mystr.capitalize()**
+```
+  mystr.capitalize()
+```
+结果：
+```
+ Hello world python world hello
+```
+
+#### <7>title
+把字符串的每个单词首字母大写
+**语法：mystr.title()**
+```
+  mystr.title()
+```
+结果：
+```
+ Hello World Python World Hello
+```
+
+#### <8>startswith
+检查字符串是否是以 obj 开头, 是则返回 True，否则返回 False
+
+**语法：mystr.startswith(obj)**
+```
+  mystr.startswith('hello')
+  mystr.startswith('ni')
+```
+结果：
+```
+  True
+  False
+```
+
+#### <9>endswith
+检查字符串是否以obj结束，如果是返回True,否则返回 False.
+
+**语法：mystr.endswith(obj)**
+```
+  mystr.endswith('hello')
+  mystr.endswith('Python')
+```
+结果：
+```
+  True
+  False
+```
+#### <10>lower
+转换 mystr 中所有大写字符为小写
+
+**语法：mystr.lower()**
+```
+  mystr.lower()
+```
+结果：
+```
+  hello world python world hello
+```
+#### <11>upper
+转换 mystr 中的小写字母为大写
+
+**语法：mystr.upper()**
+```
+  mystr.upper()
+```
+结果：
+```
+  HELLO WORLD PYTHON WORLD HELLO
+```
+#### <12>ljust
+返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串
+
+**语法：mystr.ljust(width)** 
+```
+  mystr.ljust(30)
+```
+结果：
+```
+  'hello world python world hello          '
+```
+#### <13>rjust
+返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串
+
+**语法：mystr.rjust(width)**    
+```
+  mystr.rjust(40)
+```
+结果：
+```
+ '          hello world python world hello'
+```
+#### <14>center
+返回一个原字符串居中,并使用空格填充至长度 width 的新字符串
+
+**语法：mystr.center(width)**   
+```
+  mystr.center(40)
+```
+结果：
+```
+ '     hello world python world hello     '
+```
+#### <15>lstrip
+删除 mystr 左边的空白字符
+
+**语法：mystr.lstrip()**
+```
+a = "  abc "
+a.lstrip()
+```
+结果
+```
+'abc '
+```
+#### <16>rstrip
+删除 mystr 字符串末尾的空白字符
+```
+a = "  abc "
+a.rstrip()
+```
+结果
+```
+' abc'
+```
+**语法：mystr.rstrip()**    
+
+#### <17>strip
+删除mystr字符串两端的空白字符
+```
+a = "  abc "
+a.strip()
+```
+结果
+```
+'abc'
+```
+
+#### <18>rfind
+类似于 find()函数，不过是从右边开始查找.
+
+**语法：mystr.rfind(str, start=0,end=len(mystr) )**
+```
+  mystr.rfind('python')
+  mystr.rfind('python',0,10)
+```
+结果：
+```
+12
+-1
+```
+
+#### <19>rindex
+类似于 index()，不过是从右边开始.
+
+**语法：mystr.rindex( str, start=0,end=len(mystr))**
+```
+  mystr.rindex('python')
+  mystr.rindex('python',0,10)
+```
+结果：
+```
+12
+报错：ValueError: substring not found
+```
+#### <20>partition
+把mystr以str分割成三部分,str前，str和str后
+
+**语法：mystr.partition(str)**
+```
+  mystr.partition('world')
+```
+结果：
+```
+ ('hello ', 'world', ' python world hello')
+```
+#### <21>rpartition
+类似于 partition()函数,不过是从右边开始.
+
+**语法：mystr.rpartition(str)**
+```
+  mystr.rpartition('world')
+```
+结果：
+```
+ ('hello world python ', 'world', ' hello')
+```
+#### <22>splitlines
+按照行分隔，返回一个包含各行作为元素的列表
+
+**语法：mystr.splitlines()**  
+```
+  mystr.splitlines()
+```
+结果：
+```
+['hello world python world hello']
+```
+#### <23>isalpha
+如果 mystr 所有字符都是字母 则返回 True,否则返回 False
+
+**语法：mystr.isalpha()** 
+```
+  mystr.isalpha()
+```
+结果：
+```
+False
+```
+#### <24>isdigit
+如果 mystr 只包含数字则返回 True 否则返回 False.
+
+**语法：mystr.isdigit() **
+```
+  mystr.isdigit()
+```
+结果：
+```
+False
+```
+#### <25>isalnum
+如果 mystr 所有字符都是字母或数字则返回 True,否则返回 False
+
+**语法：mystr.isalnum()**
+```
+  mystr.isalnum()
+```
+结果：
+```
+False
+```
+#### <26>isspace
+如果 mystr 中只包含空格，则返回 True，否则返回 False.
+
+**语法：mystr.isspace()**  
+```
+  mystr.isspace()
+```
+结果：
+```
+False
+```
+#### <27>join
+mystr 中每个字符后面插入str,构造出一个新的字符串
+
+**语法：mystr.join(str)**
+```
+  '-'.join(mystr)
+```
+结果：
+```
+h-e-l-l-o- -w-o-r-l-d- -p-y-t-h-o-n- -w-o-r-l-d- -h-e-l-l-o
+```
