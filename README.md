@@ -1567,3 +1567,232 @@ ValueError: tuple.index(x): x not in tuple
 >>> a.count('d')
 0
 ```
+
+# Python系列教程(九):dict 字典
+
+### 一、dict 字典
+
+Python内置了字典：dict的支持，dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度。
+
+举个例子，假设要根据同学的名字查找对应的成绩，如果用list实现，需要两个list：
+```
+names = ['Michael', 'Bob', 'Tracy']
+scores = [95, 75, 85]
+```
+给定一个名字，要查找对应的成绩，就先要在names中找到对应的位置，再从scores取出对应的成绩，list越长，耗时越长。
+
+如果用dict实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用Python写一个dict如下：
+ ```
+>>> d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}
+>>> d['Michael']
+95
+```
+说明：
+
+- 字典和列表一样，也能够存储多个数据
+- 列表中找某个元素时，是根据下标进行的
+- 字典中找某个元素时，是根据'名字'（就是冒号:前面的那个值，例如上面代码中的'Michael'、'Bob'、'Tracy'）
+- 字典的每个元素由2部分组成，键:值。例如 'Tracy':85 ,'name'为键，85为值
+
+若访问不存在的键，则会报错：
+```
+>>> d ['jack']
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'jack'
+```
+在我们不确定字典中是否存在某个键而又想获取其值时，可以使用get方法，还可以设置默认值：
+```
+>>> score= d .get('jack')
+>>> score#'age'键不存在，所以jack为None
+>>> type(score)
+<type 'NoneType'>
+>>> score= d .get('jack', 18) # 若d 中不存在'age'这个键，就返回默认值18
+>>> score
+18
+```
+### 二、dict字典的常见操作
+#### 2.1 修改元素
+字典的每个元素中的数据是可以修改的，只要通过key找到，即可修改
+
+示例代码:
+
+    info = {'name':'班长', 'id':100, 'sex':'f', 'address':'地球亚洲中国北京'}
+
+    info['id'] = 200
+
+    print('修改之后的id为%d:'%info['id'])
+
+结果:
+```
+修改之后的id为200:
+```
+
+#### 2.2 添加元素
+访问不存在的元素
+
+    info = {'name':'班长', 'sex':'f', 'address':'China'}
+
+    print('id为:%d'%info['id'])
+
+结果:
+```
+Traceback (most recent call last):
+  File "/usercode/file.py", line 5, in <module>
+    print('id为:%d'%info['id'])
+KeyError: 'id'
+
+```
+
+如果在使用 变量名['键'] = 数据 时，这个“键”在字典中，不存在，那么就会新增这个元素
+
+添加新的元素
+
+    info = {'name':'班长', 'sex':'f', 'address':'China'}
+
+    # print('id为:%d'%info['id'])#程序会终端运行，因为访问了不存在的键
+
+    info['id'] = 111
+
+    print('添加之后的id为:%d'%info['id'])
+
+结果:
+```
+添加之后的id为:111
+```
+
+#### 2.3 删除元素
+
+对字典进行删除操作，有一下几种：
+
+- del
+- clear()
+- pop()
+
+del删除指定的元素：
+
+
+    info = {'name':'班长', 'sex':'f', 'address':'China'}
+
+    print('删除前,%s'%info['name'])
+
+    del info['name']
+
+    print('删除后,%s'%info['name'])
+
+结果：
+```
+删除前,班长
+Traceback (most recent call last):
+  File "/usercode/file.py", line 9, in <module>
+    print('删除后,%s'%info['name'])
+KeyError: 'name'
+```
+del删除整个字典：
+
+
+    info = {'name':'monitor', 'sex':'f', 'address':'China'}
+
+    print('删除前,%s'%info)
+
+    del info
+
+    print('删除后,%s'%info)
+
+结果：
+```
+删除前,{'address': 'China', 'name': 'monitor', 'sex': 'f'}
+Traceback (most recent call last):
+  File "/usercode/file.py", line 9, in <module>
+    print('删除后,%s'%info)
+NameError: name 'info' is not defined
+```
+clear清空整个字典：
+
+
+    info = {'name':'monitor', 'sex':'f', 'address':'China'}
+
+    print('清空前,%s'%info)
+
+    info.clear()
+
+    print('清空后,%s'%info)
+
+结果：
+```
+清空前,{'address': 'China', 'name': 'monitor', 'sex': 'f'}
+清空后,{}
+```
+pop删除指定的元素：
+```
+info = {'name':'monitor', 'sex':'f', 'address':'China'}
+
+print('删除前,%s'%info)
+
+info.pop('name')
+
+print('删除后,%s'%info)
+```
+结果：
+```
+删除前,{'address': 'China', 'name': 'monitor', 'sex': 'f'}
+删除后,{'address': 'China', 'sex': 'f'}
+```
+
+#### 2.4 keys
+返回一个包含字典所有KEY的列表
+```
+>>>info = {'name':'monitor', 'sex':'f', 'address':'China'}
+>>>print(info.keys())
+['address', 'name', 'sex']
+```
+#### 2.5 values
+返回一个包含字典所有value的列表
+```
+>>>info = {'name':'monitor', 'sex':'f', 'address':'China'}
+>>>print(info.values())
+['China', 'monitor', 'f']
+```
+#### 2.6 items
+返回一个包含所有（键，值）元祖的列表
+```
+>>>info = {'name':'monitor', 'sex':'f', 'address':'China'}
+>>>print(info.items())
+[('address', 'China'), ('name', 'monitor'), ('sex', 'f')]
+```
+#### 2.7 has_key
+dict.has_key(key)如果key在字典中，返回True，否则返回False
+```
+>>>info = {'name':'monitor', 'sex':'f', 'address':'China'}
+>>>print(info.has_key('name'))
+True
+>>>print(info.has_key('n'))
+False
+```
+
+**请务必注意，dict内部存放的顺序和key放入的顺序是没有关系的。**
+
+和list比较，dict有以下几个特点：
+
+- 查找和插入的速度极快，不会随着key的增加而变慢；
+- 需要占用大量的内存，内存浪费多。
+
+而list相反：
+
+- 查找和插入的时间随着元素的增加而增加；
+- 占用空间小，浪费内存很少。
+- 所以，dict是用空间来换取时间的一种方法。
+
+dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常重要，需要牢记的第一条就是dict的key必须是不可变对象。
+
+这是因为dict根据key来计算value的存储位置，如果每次计算相同的key得出的结果不同，那dict内部就完全混乱了。这个通过key计算位置的算法称为哈希算法（Hash）。
+
+要保证hash的正确性，作为key的对象就不能变。在Python中，字符串、整数等都是不可变的，因此，可以放心地作为key。而list是可变的，就不能作为key：
+
+```
+>>> key = [1, 2, 3]
+>>> d[key] = 'list'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+```
