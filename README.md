@@ -1191,3 +1191,379 @@ mystr 中每个字符后面插入str,构造出一个新的字符串
 ```
 h-e-l-l-o- -w-o-r-l-d- -p-y-t-h-o-n- -w-o-r-l-d- -h-e-l-l-o
 ```
+
+# Python系列教程(八):list 列表、tuple 元组
+
+## 一、list 列表
+
+Python内置的一种数据类型是列表：list。list是一种有序的集合，可以随时添加和删除其中的元素。
+
+比如，列出班里所有同学的名字，就可以用一个list表示：
+```
+>>>names= ['xiaoming', 'xiaoli', 'xiaohong']
+>>>names
+['xiaoming', 'xiaoli', 'xiaohong']
+```
+变量names就是一个list。用**len()**函数可以获得list元素的个数：
+```
+>>> len(names)
+3
+```
+用索引来访问list中每一个位置的元素，记得索引是从0开始的：
+```
+>>> names[0]
+'xiaoming'
+>>> names[1]
+'xiaoli'
+>>> names[2]
+'xiaohong'
+>>> names[3]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list index out of range
+```
+**注：**当索引超出了范围时，Python会报一个IndexError错误，所以，要确保索引不要越界，记得最后一个元素的索引是**len(classmates) - 1**。
+
+如果要取最后一个元素，除了计算索引位置外，还可以用-1做索引，直接获取最后一个元素：
+```
+>>> names[-1]
+'xiaohong'
+```
+以此类推，可以获取倒数第2个、倒数第3个：
+```
+>>> names[-2]
+'xiaoli'
+>>> names[-3]
+'xiaoming'
+>>> names[-4]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list index out of range
+```
+当然，倒数第4个就越界了。
+
+
+### 二、list 列表的相关操作
+
+列表中存放的数据是可以进行修改的，比如"增"、"删"、"改""
+
+**<1>添加元素("增"append, extend, insert)**
+
+- **append**
+通过append可以向列表添加元素
+
+示例如下:
+
+    #定义变量A，默认有3个元素
+    A = ['xiaoWang','xiaoZhang','xiaoHua']
+
+    print("-----添加之前，列表A的数据-----")
+    for tempName in A:
+        print(tempName)
+
+    #提示、并添加元素
+    temp = input('请输入要添加的学生姓名:')
+    A.append(temp)
+
+    print("-----添加之后，列表A的数据-----")
+    for tempName in A:
+        print(tempName)
+结果:
+
+- **extend**
+通过extend可以将另一个集合中的元素逐一添加到列表中
+
+```
+>>> a = [1, 2]
+>>> b = [3, 4]
+>>> a.append(b)
+>>> a[1, 2, [3, 4]]
+>>> a.extend(b)
+>>> a[1, 2, [3, 4], 3, 4]
+```
+- **insert**
+insert(index, object) 在指定位置index前插入元素object
+
+```
+>>> a = [0, 1, 2]
+>>> a.insert(1, 3)
+>>> a[0, 3, 1, 2]
+```
+**<2>修改元素("改")**
+
+修改元素的时候，要通过下标来确定要修改的是哪个元素，然后才能进行修改
+示例如下:
+```
+ #定义变量A，默认有3个元素 
+ A = ['xiaoWang','xiaoZhang','xiaoHua']
+ print("-----修改之前，列表A的数据-----") 
+ for tempName in A: print(tempName) #修改元素 
+    A[1] = 'xiaoLu'
+    print("-----修改之后，列表A的数据-----") 
+ for tempName in A: 
+    print(tempName)
+```
+结果:
+```
+-----修改之前，列表A的数据----- 
+xiaoWang 
+xiaoZhang 
+xiaoHua
+ -----修改之后，列表A的数据----- 
+xiaoWang 
+xiaoLu 
+xiaoHua
+```
+
+**<3>查找元素("查"in, not in, index, count)**
+
+python中查找的常用方法为：
+**in（存在）**,如果存在那么结果为true，否则为false
+**not in（不存在）**,如果不存在那么结果为true，否则false
+
+示例如下：
+```
+#待查找的列表 
+nameList = ['xiaoWang','xiaoZhang','xiaoHua'] #获取用户要查找的名字 
+findName = input('请输入要查找的姓名:') #查找是否存在 
+
+if findName in nameList: 
+    print('在字典中找到了相同的名字') 
+else: 
+    print('没有找到')
+```
+结果1：(找到)
+![01-第3天-3.gif](http://upload-images.jianshu.io/upload_images/2107063-e94b892204ccedd9.gif?imageMogr2/auto-orient/strip)
+
+结果2：(没有找到)
+![01-第3天-4.gif](http://upload-images.jianshu.io/upload_images/2107063-f43f0484f56fc088.gif?imageMogr2/auto-orient/strip)
+
+说明：
+in的方法只要会用了，那么not in也是同样的用法，只不过not in判断的是不存在
+
+- **index, count**
+index和count与字符串中的用法相同
+
+```
+>>> a = ['a', 'b', 'c', 'a', 'b']
+>>> a.index('a', 1, 3) # 注意是左闭右开区间
+Traceback (most recent call last): File "<stdin>", line 1, in <module>
+ValueError: 'a' is not in list
+>>> a.index('a', 1, 4)3
+>>> a.count('b')2
+>>> a.count('d')0
+```
+
+**<4>删除元素("删"del, pop, remove)**
+
+类比现实生活中，如果某位同学调班了，那么就应该把这个条走后的学生的姓名删除掉；在开发中经常会用到删除这种功能。
+
+列表元素的常用删除方法有：
+- **del**：根据下标进行删除
+- **pop**：删除最后一个元素
+- **remove**：根据元素的值进行删除
+
+示例如下:(del)
+```
+ movieName = ['加勒比海盗','骇客帝国','第一滴血','指环王','霍比特人','速度与激情'] 
+ print('------删除之前------') 
+
+ for tempName in movieName: 
+      print(tempName)
+
+ del movieName[2] 
+ print('------删除之后------')
+
+ for tempName in movieName: 
+     print(tempName)
+```
+结果:
+```
+------删除之前------ 
+加勒比海盗
+ 骇客帝国 
+第一滴血 
+指环王 
+霍比特人 
+速度与激情 
+------删除之后------ 
+加勒比海盗 
+骇客帝国 
+指环王
+霍比特人 
+速度与激情
+```
+
+示例如下:(pop)
+```
+ movieName = ['加勒比海盗','骇客帝国','第一滴血','指环王','霍比特人','速度与激情'] 
+ print('------删除之前------') 
+
+ for tempName in movieName: 
+     print(tempName)
+ movieName.pop() 
+ print('------删除之后------') 
+
+ for tempName in movieName: 
+     print(tempName)
+```
+结果:
+```
+------删除之前------ 
+加勒比海盗 
+骇客帝国 
+第一滴血 
+指环王 
+霍比特人
+ 速度与激情 
+------删除之后------ 
+加勒比海盗 
+骇客帝国 
+第一滴血 
+指环王 
+霍比特人
+```
+
+示例如下:(remove)
+```
+ movieName = ['加勒比海盗','骇客帝国','第一滴血','指环王','霍比特人','速度与激情']
+ print('------删除之前------') 
+
+ for tempName in movieName: 
+     print(tempName) 
+
+ movieName.remove('指环王') 
+ print('------删除之后------') 
+
+ for tempName in movieName: 
+     print(tempName)
+```
+结果:
+```
+------删除之前------ 
+加勒比海盗 
+骇客帝国 
+第一滴血 
+指环王 
+霍比特人
+ 速度与激情 
+------删除之后------ 
+加勒比海盗 
+骇客帝国 
+第一滴血 
+霍比特人 
+速度与激情
+```
+**<5>排序(sort, reverse)**
+
+- **sort**方法是将list按特定顺序重新排列，默认为由小到大，参数reverse=True可改为倒序，由大到小。
+
+- **reverse**方法是将list逆置。
+
+```
+>>> a = [1, 4, 2, 3]
+>>> a[1, 4, 2, 3]
+>>> a.reverse()
+>>> a[3, 2, 4, 1]
+>>> a.sort()
+>>> a[1, 2, 3, 4]
+>>> a.sort(reverse=True)
+>>> a[4, 3, 2, 1]
+```
+### 三、列表的嵌套
+
+#### 3.1 列表嵌套
+
+类似while循环的嵌套，列表也是支持嵌套的
+
+一个列表中的元素又是一个列表，那么这就是列表的嵌套
+``` 
+schoolNames = [['北京大学','清华大学'], 
+               ['南开大学','天津大学','天津师范大学'],
+               ['山东大学','中国海洋大学']]
+```
+#### 3.2  应用
+
+一个学校，有3个办公室，现在有8位老师等待工位的分配，请编写程序，完成随机的分配
+```
+#encoding=utf-8
+
+import random
+
+# 定义一个列表用来保存3个办公室
+offices = [[],[],[]]
+
+# 定义一个列表用来存储8位老师的名字
+names = ['A','B','C','D','E','F','G','H']
+
+i = 0
+for name in names:
+    index = random.randint(0,2)    
+    offices[index].append(name)
+
+i = 1
+for tempNames in offices:
+    print('办公室%d的人数为:%d'%(i,len(tempNames)))
+    i+=1
+    for name in tempNames:
+        print("%s"%name,end='')
+    print("\n")
+    print("-"*20)
+```
+运行结果如下:
+```
+办公室1的人数为：4
+ABCE
+--------------------
+办公室2的人数为：3
+DGH
+--------------------
+办公室3的人数为：1
+F
+--------------------
+```
+
+### 四、元组
+
+Python的元组与列表类似，不同之处在于元组的元素不能修改。元组使用小括号，列表使用方括号。
+```
+>>> tuple= ('abc',66,3.14)
+>>> tuple
+('abc',66,3.14)
+```
+**<1>索引查找元素**
+```
+>>> tuple=('abc',66,3.14)
+>>> tuple[0]
+'abc'
+>>> tuple[1]
+66
+>>> tuple[2]
+3.14
+```
+**<2>修改元组**
+```
+>>> tuple=('abc',66,3.14)
+>>> tuple[0] = 1
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+```
+**说明： python中不允许修改元组的数据，包括不能删除其中的元素。**
+
+**<3>元组的内置函数count, index**
+
+index和count与字符串和列表中的用法相同
+```
+>>> a = ('a', 'b', 'c', 'a', 'b')
+>>> a.index('a', 1, 3) # 注意是左闭右开区间
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: tuple.index(x): x not in tuple
+>>> a.index('a', 1, 4)
+3
+>>> a.count('b')
+2
+>>> a.count('d')
+0
+```
